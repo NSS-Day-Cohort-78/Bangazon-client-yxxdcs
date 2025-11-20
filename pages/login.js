@@ -21,10 +21,12 @@ export default function Login() {
     }
 
     login(user).then((res) => {
-      if (res.token) {
+      if (res && res.token) {
         setToken(res.token)
         router.push('/')
       }
+    }).catch((err) => {
+      console.error('Login error:', err)
     })
   }
 
