@@ -42,12 +42,12 @@ export function addProductToOrder(id) {
 }
 
 export function removeProductFromOrder(id) {
-	return fetchWithoutResponse(`products/${id}/remove-from-order`, {
-		method: "DELETE",
-		headers: {
-			Authorization: `Token ${localStorage.getItem("token")}`
-		}
-	})
+  return fetchWithoutResponse(`lineitems/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token ${localStorage.getItem('token')}`
+    }
+  })
 }
 
 export function deleteProduct(id) {
