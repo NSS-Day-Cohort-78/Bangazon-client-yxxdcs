@@ -8,6 +8,7 @@ import CompleteFormModal from "../components/order/form-modal";
 import { completeCurrentOrder, getCart } from "../data/orders";
 import { getPaymentTypes } from "../data/payment-types";
 import { removeProductFromOrder } from "../data/products";
+import { deleteOrder } from "../data/orders";
 
 export default function Cart() {
   const [cart, setCart] = useState({});
@@ -16,14 +17,23 @@ export default function Cart() {
   const router = useRouter();
 
   const refresh = () => {
-    getCart().then((cartData) => {
-      if (cartData) {
-        console.log("Raw cart data from API:", cartData);
-        console.log("Does it have lineitems?", cartData.lineitems);
-        console.log("Does it have products?", cartData.products);
-        setCart(cartData);
-      }
-    });
+    getCart()
+      .then((cartData) => {
+        if (cartData) {
+          console.log("Raw cart data from API:", cartData);
+          console.log("Does it have lineitems?", cartData.lineitems);
+          console.log("Does it have products?", cartData.products);
+          setCart(cartData);
+        }
+      })
+      .catch((error) => {
+        if (error.message === '404') {
+          console.log("No cart found (404), setting empty cart");
+          setCart({});
+        } else {
+          console.error("Error fetching cart:", error);
+        }
+      });
   };
 
   useEffect(() => {
@@ -60,6 +70,12 @@ export default function Cart() {
       });
   };
 
+  const handleDeleteOrder = () => {
+    deleteOrder().then(() => {refresh()}).catch((error) => {
+      console.error("Failed to delete order:", error)
+    })
+  }
+
   // const mockCart = {
   //   total: 29.99,
   //   products: [
@@ -85,7 +101,10 @@ export default function Cart() {
           >
             Complete Order
           </a>
-          <a className="card-footer-item">Delete Order</a>
+          <a 
+            className="card-footer-item"
+            onClick={() => handleDeleteOrder()}
+            >Delete Order</a>
         </>
       </CardLayout>
     </>
