@@ -93,7 +93,7 @@ export function editProduct(id, product) {
 }
 
 export function recommendProduct(id, username) {
-	return fetchWithResponse(`products/${id}/recommend`, {
+	return fetchWithoutResponse(`products/${id}/recommend`, {
 		method: "POST",
 		headers: {
 			Authorization: `Token ${localStorage.getItem("token")}`,
