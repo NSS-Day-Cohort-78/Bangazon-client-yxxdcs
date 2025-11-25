@@ -17,15 +17,15 @@ export function Detail({ product, like, unlike }) {
 	}
 
 	const recommendProductEvent = () => {
-		recommendProduct(product.id, usernameEl.current.value).then((res) => {
-			if (res) {
-				setShowError(true)
-			} else {
+		recommendProduct(product.id, usernameEl.current.value)
+			.then(() => {
 				setShowModal(false)
 				setShowError(false)
 				usernameEl.current.value = ""
-			}
-		})
+			})
+			.catch(() => {
+				setShowError(true)
+			})
 	}
 
 	return (
