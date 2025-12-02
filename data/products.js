@@ -15,7 +15,7 @@ export function getProducts(query = undefined) {
 }
 
 export function getCategories() {
-	return fetchWithResponse("categories", {
+	return fetchWithResponse("productcategories", {
 		headers: {
 			Authorization: `Token ${localStorage.getItem("token")}`
 		}
@@ -42,12 +42,12 @@ export function addProductToOrder(id) {
 }
 
 export function removeProductFromOrder(id) {
-  return fetchWithoutResponse(`lineitems/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Token ${localStorage.getItem('token')}`
-    }
-  })
+	return fetchWithoutResponse(`lineitems/${id}`, {
+		method: "DELETE",
+		headers: {
+			Authorization: `Token ${localStorage.getItem("token")}`
+		}
+	})
 }
 
 export function deleteProduct(id) {
