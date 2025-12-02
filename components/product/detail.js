@@ -87,7 +87,7 @@ export function Detail({ product, like, unlike }) {
 								{product.is_liked ? (
 									<button
 										className="button is-link is-outlined"
-										onClick={unlike}
+										onClick={() => unlike(product.id)}
 									>
 										<span className="icon is-small">
 											<i className="fas fa-heart-broken"></i>
@@ -95,7 +95,7 @@ export function Detail({ product, like, unlike }) {
 										<span>Unlike Product</span>
 									</button>
 								) : (
-									<button className="button is-link is-outlined" onClick={like}>
+									<button className="button is-link is-outlined" onClick={() => like(product.id)}>
 										<span className="icon is-small">
 											<i className="fas fa-heart"></i>
 										</span>
