@@ -12,18 +12,18 @@ export default function ProductDetail() {
   const [product, setProduct] = useState({})
 
   const refresh = () => {
-    getProductById(id).then(productData => {
+    return getProductById(id).then(productData => {
       if (productData) {
         setProduct(productData)
       }
     })
   }
 
-  const like = () => {
+  const like = (id) => {
     likeProduct(id).then(refresh)
   }
 
-  const unlike = () => {
+  const unlike = (id) => {
     unLikeProduct(id).then(refresh)
   }
 
